@@ -1,3 +1,4 @@
+import 'package:blago_quiz/widgets/auth/auth_screen_widget.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +13,35 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Blago Quiz",
       theme: ThemeData(),
-      routes: const <String, WidgetBuilder>{},
+      routes: <String, WidgetBuilder>{
+        "/auth": (context) => const AuthScreenWidget(),
+      },
+      initialRoute: "/auth",
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute<void>(
+          builder: (context) {
+            return Scaffold(
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "In develop",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(context, "/auth");
+                      },
+                      child: const Text("Back"),
+                    )
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }
