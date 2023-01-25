@@ -1,4 +1,6 @@
-import 'package:blago_quiz/widgets/auth/auth_screen_widget.dart';
+import 'package:blago_quiz/theme/app_colors.dart';
+import 'package:blago_quiz/widgets/authScreen/auth_screen_widget.dart';
+import 'package:blago_quiz/widgets/mainScreen/main_screen_widget.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,11 +14,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Blago Quiz",
-      theme: ThemeData(),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Color.fromARGB(255, 117, 117, 117),
+        ),
+      ),
       routes: <String, WidgetBuilder>{
         "/auth": (context) => const AuthScreenWidget(),
+        "/main": (context) => MainScreenWidget(),
       },
-      initialRoute: "/auth",
+      initialRoute: "/main",
       onUnknownRoute: (settings) {
         return MaterialPageRoute<void>(
           builder: (context) {
