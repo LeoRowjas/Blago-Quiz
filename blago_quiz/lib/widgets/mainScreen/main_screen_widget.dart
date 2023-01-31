@@ -1,4 +1,6 @@
 import 'package:blago_quiz/theme/app_colors.dart';
+import 'package:blago_quiz/widgets/profileScreen/profile_screen_widget.dart';
+import 'package:blago_quiz/widgets/mainScreen/top_info_widget.dart';
 import 'package:flutter/material.dart';
 
 class MainScreenWidget extends StatefulWidget {
@@ -19,64 +21,30 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size(double.infinity, 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      height: 22,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(),
-                      ),
-                      child: const Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 1, horizontal: 8),
-                        child: Text("data"),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      height: 22,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+      appBar: const PreferredSize(
+        preferredSize: Size(double.infinity, 40),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12),
+          child: TopInfoWidget(),
         ),
       ),
-      body: IndexedStack(
-        index: _selectedTab,
-        children: const [
-          Center(child: Text("Экран викторины находится в разработке")),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 12, right: 12),
+        child: IndexedStack(
+          index: _selectedTab,
+          children: const [
+            Center(child: Text("Экран викторины находится в разработке")),
 
-          //TODO: Профиль - история прохождения викторин(название, баллы, дата)
-          //Профиль - Обменянные призы(название, статус, дата)
-          //
-          Center(child: Text("Экран профиля находится в разработке")),
+            //TODO: Профиль - история прохождения викторин(название, баллы, дата)
+            //TODO: Профиль - Обменянные призы(название, статус, дата)
+            //TODO: Профиль - раздвигающиеся меню
+            ProfileScreenWidget(),
 
-          Center(
-            child: Text("Экран магазина находится в разработке"),
-          )
-        ],
+            Center(
+              child: Text("Экран магазина находится в разработке"),
+            )
+          ],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: AppColors.accentBlue,

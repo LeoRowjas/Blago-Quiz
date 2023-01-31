@@ -97,7 +97,7 @@ class RegisterButton extends StatelessWidget {
 }
 
 class _InfoFormsWidget extends StatefulWidget {
-  const _InfoFormsWidget({super.key});
+  const _InfoFormsWidget();
 
   @override
   State<_InfoFormsWidget> createState() => _InfoFormsWidgetState();
@@ -185,7 +185,7 @@ class _InfoFormsWidgetState extends State<_InfoFormsWidget> {
 }
 
 class _TopContent extends StatelessWidget {
-  const _TopContent({super.key});
+  const _TopContent();
 
   @override
   Widget build(BuildContext context) {

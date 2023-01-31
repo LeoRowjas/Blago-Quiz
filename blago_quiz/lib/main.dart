@@ -1,4 +1,3 @@
-import 'package:blago_quiz/theme/app_colors.dart';
 import 'package:blago_quiz/widgets/authScreen/auth_screen_widget.dart';
 import 'package:blago_quiz/widgets/mainScreen/main_screen_widget.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: <String, WidgetBuilder>{
         "/auth": (context) => const AuthScreenWidget(),
-        "/main": (context) => MainScreenWidget(),
+        "/main": (context) => const MainScreenWidget(),
       },
       initialRoute: "/main",
       onUnknownRoute: (settings) {
