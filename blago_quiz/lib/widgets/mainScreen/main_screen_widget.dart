@@ -32,15 +32,15 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         padding: const EdgeInsets.only(left: 12, right: 12),
         child: IndexedStack(
           index: _selectedTab,
-          children: const [
-            Center(child: Text("Экран викторины находится в разработке")),
+          children: [
+            const Center(child: Text("Экран викторины находится в разработке")),
 
             //TODO: Профиль - история прохождения викторин(название, баллы, дата)
             //TODO: Профиль - Обменянные призы(название, статус, дата)
             //TODO: Профиль - раздвигающиеся меню
             ProfileScreenWidget(),
 
-            Center(
+            const Center(
               child: Text("Экран магазина находится в разработке"),
             )
           ],

@@ -1,16 +1,26 @@
 import 'package:blago_quiz/resources/resources.dart';
+import 'package:blago_quiz/theme/app_colors.dart';
 import 'package:blago_quiz/theme/text_styles.dart';
 import 'package:blago_quiz/widgets/profileScreen/passed_quizzes_history_widget.dart';
+import 'package:blago_quiz/widgets/profileScreen/purchase_history_widget.dart';
 import 'package:flutter/material.dart';
 
-class ProfileScreenWidget extends StatefulWidget {
-  const ProfileScreenWidget({super.key});
+class ProfileScreenWidget extends StatelessWidget {
+  ProfileScreenWidget({
+    super.key,
+  });
 
-  @override
-  State<ProfileScreenWidget> createState() => ProfileScreenWidgetState();
-}
+  final List<ExpansionPanelData> data = [
+    ExpansionPanelData(
+      headerValue: "Пройденные викторины",
+      expandedValue: PassedQuizzesHistoryWidget(),
+    ),
+    ExpansionPanelData(
+      headerValue: "Покупки",
+      expandedValue: PurchaseHistory(),
+    ),
+  ];
 
-class ProfileScreenWidgetState extends State<ProfileScreenWidget> {
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -18,20 +28,19 @@ class ProfileScreenWidgetState extends State<ProfileScreenWidget> {
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
-            _TopInfoProfileWidget(),
-            Divider(
+          children: [
+            const _TopInfoProfileWidget(),
+            const Divider(
               height: 40,
               thickness: 1.5,
               color: Colors.black,
             ),
-            ExpansionTest(),
-            Divider(
+            ExpansionMenus(data: data),
+            const Divider(
               height: 40,
               thickness: 1.5,
               color: Colors.black,
             ),
-            ButtonsTest(),
           ],
         )
       ],
@@ -97,46 +106,28 @@ class _TopInfoProfileWidget extends StatelessWidget {
   }
 }
 
-class Item {
-  Widget expandedValue;
-  String headerValue;
+class ExpansionPanelData {
+  final Widget expandedValue;
+  final String headerValue;
   bool isExpanded;
 
-  Item({
-    required this.expandedValue,
+  ExpansionPanelData({
     required this.headerValue,
+    required this.expandedValue,
     this.isExpanded = false,
   });
 }
 
-List<Item> generaeItems(int numOfItems) {
-  return List<Item>.generate(numOfItems, (index) {
-    return Item(
-      expandedValue: Text("This is item number ${index + 1}"),
-      headerValue: "Header ${index + 1}",
-    );
-  });
-}
+class ExpansionMenus extends StatefulWidget {
+  const ExpansionMenus({super.key, required this.data});
 
-class ExpansionTest extends StatefulWidget {
-  const ExpansionTest({super.key});
+  final List<ExpansionPanelData> data;
 
   @override
-  State<ExpansionTest> createState() => _ExpansionTestState();
+  State<ExpansionMenus> createState() => _ExpansionMenusState();
 }
 
-class _ExpansionTestState extends State<ExpansionTest> {
-  final List<Item> _data = [
-    Item(
-      expandedValue: const PassedQuizzesHistoryWidget(),
-      headerValue: "Пройденные викторины",
-    ),
-    Item(
-      expandedValue: const Text("ТУТ БУДЕТ ИСТОРИЯ ПОКУПОК"),
-      headerValue: "Покупки",
-    ),
-  ];
-
+class _ExpansionMenusState extends State<ExpansionMenus> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -148,18 +139,24 @@ class _ExpansionTestState extends State<ExpansionTest> {
     return ExpansionPanelList(
       expansionCallback: (panelIndex, isExpanded) {
         setState(() {
-          _data[panelIndex].isExpanded = !isExpanded;
+          widget.data[panelIndex].isExpanded = !isExpanded;
         });
       },
-      children: _data.map<ExpansionPanel>(
-        ((Item item) {
+      children: widget.data.map<ExpansionPanel>(
+        ((ExpansionPanelData item) {
           return ExpansionPanel(
+            backgroundColor: AppColors.accentBlue,
+            canTapOnHeader: true,
             headerBuilder: ((context, isExpanded) {
               return ListTile(
-                title: Text(item.headerValue),
+                title: Text(
+                  item.headerValue,
+                  style: AppTextStyles.whiteLargeText,
+                ),
               );
             }),
             body: ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
               title: item.expandedValue,
             ),
             isExpanded: item.isExpanded,

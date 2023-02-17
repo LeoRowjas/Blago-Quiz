@@ -14,4 +14,19 @@ abstract class AppTextStyles {
     color: Colors.grey,
     fontWeight: FontWeight.w500,
   );
+  static const whiteMediumText = TextStyle(
+    fontSize: 16,
+    color: Colors.white,
+    fontWeight: FontWeight.w500,
+  );
+  static const blackMediumText = TextStyle(
+    fontSize: 16,
+    color: Color.fromARGB(200, 0, 0, 0),
+    fontWeight: FontWeight.w500,
+  );
+  static const whiteLargeText = TextStyle(
+    fontSize: 18,
+    color: Colors.white,
+    fontWeight: FontWeight.w500,
+  );
 }
