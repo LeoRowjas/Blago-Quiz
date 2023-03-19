@@ -1,8 +1,8 @@
 import 'package:blago_quiz/resources/resources.dart';
 import 'package:blago_quiz/theme/app_colors.dart';
 import 'package:blago_quiz/theme/text_styles.dart';
-import 'package:blago_quiz/widgets/profileScreen/passed_quizzes_history_widget.dart';
-import 'package:blago_quiz/widgets/profileScreen/purchase_history_widget.dart';
+import 'package:blago_quiz/widgets/profile/passed_quizzes_history_widget.dart';
+import 'package:blago_quiz/widgets/profile/purchase_history_widget.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreenWidget extends StatelessWidget {
@@ -36,42 +36,9 @@ class ProfileScreenWidget extends StatelessWidget {
               color: Colors.black,
             ),
             ExpansionMenus(data: data),
-            const Divider(
-              height: 40,
-              thickness: 1.5,
-              color: Colors.black,
-            ),
           ],
         )
       ],
-    );
-  }
-}
-
-class ButtonsTest extends StatelessWidget {
-  const ButtonsTest({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(10),
-      onTap: () {},
-      child: Container(
-        height: 40,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.black),
-        ),
-        child: Row(
-          children: const [
-            Icon(Icons.history),
-            SizedBox(width: 8),
-            Expanded(child: Text("История пройденных викторин")),
-            Icon(Icons.chevron_right)
-          ],
-        ),
-      ),
     );
   }
 }
@@ -86,14 +53,14 @@ class _TopInfoProfileWidget extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(top: 8),
           child: CircleAvatar(
-            backgroundImage: AssetImage(DevImages.lenyaValyazhniy),
+            backgroundImage: AssetImage(ProfileImg.leonid),
             radius: 70,
           ),
         ),
         Padding(
           padding: EdgeInsets.all(8.0),
           child: Text(
-            "Лёнька Лох",
+            "Леонид",
             style: AppTextStyles.blackHeader,
           ),
         ),
@@ -151,12 +118,13 @@ class _ExpansionMenusState extends State<ExpansionMenus> {
               return ListTile(
                 title: Text(
                   item.headerValue,
-                  style: AppTextStyles.whiteLargeText,
+                  style: AppTextStyles.whiteMediumText,
                 ),
               );
             }),
             body: ListTile(
-              contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
               title: item.expandedValue,
             ),
             isExpanded: item.isExpanded,

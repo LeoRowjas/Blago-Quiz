@@ -43,7 +43,7 @@ class PurchaseData {
 }
 
 class _PurchasesTable extends StatelessWidget {
-  const _PurchasesTable({super.key, required this.purchases});
+  const _PurchasesTable({required this.purchases});
   final List<PurchaseData> purchases;
 
   @override
@@ -85,7 +85,7 @@ class _PurchasesTable extends StatelessWidget {
 
 //TODO: создать система инхеритед виджетов, чтобы не прокидывать через конструкторы каждый раз данные
 class _PurchaseTableItems extends StatelessWidget {
-  const _PurchaseTableItems({super.key, required this.purchases});
+  const _PurchaseTableItems({required this.purchases});
 
   final List<PurchaseData> purchases;
   @override

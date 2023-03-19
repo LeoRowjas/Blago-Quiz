@@ -8,19 +8,22 @@ class TopInfoWidget extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Row(
-          children: const [
-            NicknameWidget(),
-            SizedBox(width: 8),
-            DiamondsCountWidget(),
-          ],
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Row(
+            children: const [
+              NicknameWidget(),
+              SizedBox(width: 8),
+              DiamondsCountWidget(),
+            ],
+          ),
         ),
         const SizedBox(
           height: 5,
         ),
         Container(
           color: Colors.black,
-          height: 1,
+          height: 1.4,
           width: double.infinity,
         ),
       ],
@@ -41,11 +44,11 @@ class NicknameWidget extends StatelessWidget {
         height: 22,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(),
+          border: Border.all(width: 1.4),
         ),
         child: const Padding(
           padding: EdgeInsets.symmetric(vertical: 1, horizontal: 8),
-          child: Text("Лёнька Лох"),
+          child: Text("Леонид"),
         ),
       ),
     );
@@ -65,13 +68,13 @@ class DiamondsCountWidget extends StatelessWidget {
         height: 22,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(),
+          border: Border.all(width: 1.4),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 8),
           child: Row(
             children: const [
-              Text("1000"),
+              Text("1540"),
               Icon(
                 Icons.diamond_outlined,
                 color: Colors.blue,

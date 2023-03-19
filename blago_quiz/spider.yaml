@@ -17,6 +17,9 @@ use_references_list: false
 package: resources
 
 groups:
-  - path: assets/developmentImages
-    class_name: DevImages
+  - path: assets/profileDevImg
+    class_name: ProfileImg
+    types: [ .png, .jpg, .jpeg, .webp, .webm, .bmp ]
+  - path: assets/productsDevImg
+    class_name: ProductImage
     types: [ .png, .jpg, .jpeg, .webp, .webm, .bmp ]

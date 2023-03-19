@@ -1,6 +1,8 @@
 import 'package:blago_quiz/theme/app_colors.dart';
-import 'package:blago_quiz/widgets/profileScreen/profile_screen_widget.dart';
+import 'package:blago_quiz/widgets/profile/profile_screen_widget.dart';
 import 'package:blago_quiz/widgets/mainScreen/top_info_widget.dart';
+import 'package:blago_quiz/widgets/quizzes/quizzes_screen.dart';
+import 'package:blago_quiz/widgets/store/store_screen_widget.dart';
 import 'package:flutter/material.dart';
 
 class MainScreenWidget extends StatefulWidget {
@@ -11,7 +13,7 @@ class MainScreenWidget extends StatefulWidget {
 }
 
 class _MainScreenWidgetState extends State<MainScreenWidget> {
-  int _selectedTab = 1;
+  int _selectedTab = 2;
 
   void _onTabChange(int index) {
     _selectedTab = index;
@@ -23,26 +25,16 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size(double.infinity, 40),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12),
-          child: TopInfoWidget(),
-        ),
+        child: TopInfoWidget(),
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 12, right: 12),
         child: IndexedStack(
           index: _selectedTab,
           children: [
-            const Center(child: Text("Экран викторины находится в разработке")),
-
-            //TODO: Профиль - история прохождения викторин(название, баллы, дата)
-            //TODO: Профиль - Обменянные призы(название, статус, дата)
-            //TODO: Профиль - раздвигающиеся меню
+            QuizzesScreenWidget(),
             ProfileScreenWidget(),
-
-            const Center(
-              child: Text("Экран магазина находится в разработке"),
-            )
+            StoreScreenWidget(),
           ],
         ),
       ),
