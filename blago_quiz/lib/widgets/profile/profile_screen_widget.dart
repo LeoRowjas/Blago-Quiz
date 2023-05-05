@@ -49,7 +49,7 @@ class _TopInfoProfileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
+      children: [
         Padding(
           padding: EdgeInsets.only(top: 8),
           child: CircleAvatar(
@@ -65,7 +65,11 @@ class _TopInfoProfileWidget extends StatelessWidget {
           ),
         ),
         Text(
-          "Пройдено викторин - 24",
+          "Пройдено викторин - ${PassedQuizzesHistoryWidget.model.length}",
+          style: AppTextStyles.additionalGreyText,
+        ),
+        Text(
+          "Куплено предметов - ${PurchaseHistory.purchases.length}",
           style: AppTextStyles.additionalGreyText,
         )
       ],

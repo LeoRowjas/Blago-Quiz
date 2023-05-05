@@ -2,13 +2,54 @@ import 'package:blago_quiz/resources/resources.dart';
 import 'package:blago_quiz/theme/app_colors.dart';
 import 'package:blago_quiz/theme/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'buy_bottom_sheet_widget.dart';
 
 class StoreScreenWidget extends StatelessWidget {
   const StoreScreenWidget({super.key});
 
   final List<Product> products = const [
     Product(
-      name: "Ручка",
+      name: "Авторучка",
+      cost: 540,
+      image: AssetImage(ProductImage.pen),
+    ),
+    Product(
+      name: "Футболка",
+      cost: 4000,
+      image: AssetImage(ProductImage.shirt),
+    ),
+    Product(
+      name: "Шоппер",
+      cost: 3000,
+      image: AssetImage(ProductImage.shopper),
+    ),
+    Product(
+      name: "Билеты в театр",
+      cost: 7500,
+      image: AssetImage(ProductImage.tickets),
+    ),
+    Product(
+      name: "Авторучка",
+      cost: 540,
+      image: AssetImage(ProductImage.pen),
+    ),
+    Product(
+      name: "Футболка",
+      cost: 4000,
+      image: AssetImage(ProductImage.shirt),
+    ),
+    Product(
+      name: "Шоппер",
+      cost: 3000,
+      image: AssetImage(ProductImage.shopper),
+    ),
+    Product(
+      name: "Билеты в театр",
+      cost: 7500,
+      image: AssetImage(ProductImage.tickets),
+    ),
+    Product(
+      name: "Авторучка",
       cost: 540,
       image: AssetImage(ProductImage.pen),
     ),
@@ -31,25 +72,19 @@ class StoreScreenWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ProductTileWidget(product: products[0]),
-            ProductTileWidget(product: products[1]),
-          ],
-        ),
-        const SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ProductTileWidget(product: products[2]),
-            ProductTileWidget(product: products[3]),
-          ],
-        ),
-      ],
+    return GridView.builder(
+      physics: const BouncingScrollPhysics(),
+      itemCount: products.length,
+      padding: const EdgeInsets.symmetric(vertical: 15),
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 190,
+        mainAxisSpacing: 20,
+        crossAxisSpacing: 20,
+        mainAxisExtent: 228,
+      ),
+      itemBuilder: ((context, index) {
+        return ProductTileWidget(product: products[index]);
+      }),
     );
   }
 }
@@ -87,7 +122,16 @@ class ProductTileWidget extends StatelessWidget {
                   elevation: MaterialStateProperty.all(0),
                   backgroundColor:
                       MaterialStateProperty.all(AppColors.accentBlue)),
-              onPressed: () {},
+              onPressed: () {
+                showModalBottomSheet(
+                    shape: const RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(20))),
+                    context: context,
+                    builder: (BuildContext context) {
+                      return BuySheetWidget(product: product);
+                    });
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

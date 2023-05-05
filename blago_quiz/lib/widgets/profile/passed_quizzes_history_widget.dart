@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 
 class PassedQuizzesHistoryWidget extends StatefulWidget {
   PassedQuizzesHistoryWidget({super.key});
-  final model = [
+  static final model = [
     _QuizzModel("Наука", 450, DateTime(2022, 4, 5, 17, 30)),
     _QuizzModel("Искусство", 450, DateTime(2022, 4, 5, 17, 30)),
     _QuizzModel("Общая", 450, DateTime(2022, 4, 5, 17, 30)),
@@ -23,7 +23,7 @@ class PassedQuizzesHistoryWidgetState
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: _QuizzTable(quizData: widget.model),
+      child: _QuizzTable(quizData: PassedQuizzesHistoryWidget.model),
     );
   }
 }

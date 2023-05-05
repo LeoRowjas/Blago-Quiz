@@ -7,7 +7,7 @@ import '../../theme/text_styles.dart';
 class PurchaseHistory extends StatefulWidget {
   PurchaseHistory({super.key});
 
-  final List<PurchaseData> purchases = [
+  static final List<PurchaseData> purchases = [
     PurchaseData("Ручка", 500, DateTime(2023, 2, 14, 14, 48)),
     PurchaseData("Худи", 5000, DateTime(2023, 2, 14, 14, 48)),
     PurchaseData("Кружка", 1500, DateTime(2023, 2, 14, 14, 48)),
@@ -24,7 +24,7 @@ class _PurchaseHistoryState extends State<PurchaseHistory> {
   Widget build(BuildContext context) {
     return Center(
       child: _PurchasesTable(
-        purchases: widget.purchases,
+        purchases: PurchaseHistory.purchases,
       ),
     );
   }

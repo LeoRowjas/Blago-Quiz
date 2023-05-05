@@ -23,3 +23,6 @@ groups:
   - path: assets/productsDevImg
     class_name: ProductImage
     types: [ .png, .jpg, .jpeg, .webp, .webm, .bmp ]
+  - path: assets/background
+    class_name: BackgroundImg
+    types: [ .png, .jpg, .jpeg, .webp, .webm, .bmp ]
