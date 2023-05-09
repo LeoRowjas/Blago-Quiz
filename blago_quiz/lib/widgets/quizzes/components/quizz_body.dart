@@ -1,16 +1,17 @@
+import 'package:blago_quiz/controllers/question_controller.dart';
 import 'package:blago_quiz/resources/resources.dart';
 import 'package:blago_quiz/theme/app_colors.dart';
-import 'package:blago_quiz/theme/text_styles.dart';
 import 'package:blago_quiz/widgets/quizzes/components/progress_bar.dart';
+import 'package:blago_quiz/widgets/quizzes/components/question_card.dart';
 import 'package:flutter/material.dart';
-
-import '../../../questions/romanov_questions.dart';
+import 'package:get/get.dart';
 
 class QuestionBody extends StatelessWidget {
   const QuestionBody({super.key});
 
   @override
   Widget build(BuildContext context) {
+    QuestionController questionController = Get.put(QuestionController());
     return Stack(
       children: [
         SizedBox(
@@ -22,101 +23,58 @@ class QuestionBody extends StatelessWidget {
           ),
         ),
         SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const ProgressBar(),
-                const SizedBox(height: 24),
-                Text.rich(
-                  TextSpan(
-                    text: "Question 1",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline4
-                        ?.copyWith(color: AppColors.pastelYellow),
-                    children: [
-                      TextSpan(
-                        text: "/10",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline4
-                            ?.copyWith(color: AppColors.pastelYellow),
-                      )
-                    ],
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                child: ProgressBar(),
+              ),
+              const SizedBox(height: 18),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Obx(
+                  () => Text.rich(
+                    TextSpan(
+                      text:
+                          "Question ${questionController.questionNumber.value}",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline4
+                          ?.copyWith(color: AppColors.pastelYellow),
+                      children: [
+                        TextSpan(
+                          text: "/${questionController.questions.length}",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline4
+                              ?.copyWith(color: AppColors.pastelYellow),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-                const Divider(
-                  thickness: 0.8,
-                  color: AppColors.sapphireColor,
+              ),
+              const Divider(
+                thickness: 0.8,
+                color: AppColors.sapphireColor,
+              ),
+              const SizedBox(height: 24),
+              Expanded(
+                child: PageView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: questionController.pageController,
+                  onPageChanged: questionController.updateTheQuestionNum,
+                  itemCount: questionController.questions.length,
+                  itemBuilder: ((context, index) => QuestionCard(
+                        question: questionController.questions[index],
+                      )),
                 ),
-                const SizedBox(height: 24),
-                Container(
-                  padding: EdgeInsets.all(24),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  child: Column(
-                    children: [
-                      QuestionCard(),
-                      AnswerOption(),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              )
+            ],
           ),
         ),
       ],
-    );
-  }
-}
-
-class QuestionCard extends StatelessWidget {
-  const QuestionCard({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      RomanovQuestions.questions[0].question,
-      style:
-          Theme.of(context).textTheme.headline6?.copyWith(color: Colors.black),
-    );
-  }
-}
-
-class AnswerOption extends StatelessWidget {
-  const AnswerOption({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 24),
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text("1. Test", style: TextStyle(color: Colors.grey, fontSize: 16)),
-          Container(
-            width: 26,
-            height: 26,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50),
-              border: Border.all(color: Colors.grey),
-            ),
-          )
-        ],
-      ),
     );
   }
 }

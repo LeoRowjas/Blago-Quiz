@@ -14,7 +14,7 @@ class MainScreenWidget extends StatefulWidget {
 }
 
 class _MainScreenWidgetState extends State<MainScreenWidget> {
-  int _selectedTab = 2;
+  int _selectedTab = 0;
 
   void _onTabChange(int index) {
     _selectedTab = index;

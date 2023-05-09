@@ -1,3 +1,5 @@
+import 'package:blago_quiz/widgets/profile/profile_screen_widget.dart';
+import 'package:blago_quiz/widgets/profile/purchase_history_widget.dart';
 import 'package:flutter/material.dart';
 import 'store_screen_widget.dart';
 import 'package:blago_quiz/theme/app_colors.dart';
@@ -10,10 +12,11 @@ class BuySheetWidget extends StatefulWidget {
   }) : super(key: key);
 
   final Product product;
-  List<BorderSide> deliveryBorders = [BorderSide(), BorderSide()];
+  List<BorderSide> deliveryBorders = [const BorderSide(), const BorderSide()];
   final int deliveryCost = 500;
   bool homeDeliveryPressed = false;
   bool myselfdeliveryPressed = false;
+  bool showErrorText = false;
 
   @override
   State<BuySheetWidget> createState() => _BuySheetWidgetState();
@@ -26,8 +29,21 @@ class _BuySheetWidgetState extends State<BuySheetWidget> {
         ? widget.product.cost + widget.deliveryCost
         : widget.product.cost;
 
-    return Container(
-      height: 450,
+    void onPurchase() {
+      if (User.balance.value >= finalPrice) {
+        widget.showErrorText = false;
+        Navigator.pop(context);
+        User.balance.value -= finalPrice;
+        User.purchases.value.add(PurchaseData(widget.product, DateTime.now()));
+        setState(() {});
+      } else {
+        widget.showErrorText = true;
+        setState(() {});
+      }
+    }
+
+    return SizedBox(
+      height: 454,
       child: Column(
         children: [
           HeaderBottomSheetWidget(product: widget.product),
@@ -163,20 +179,35 @@ class _BuySheetWidgetState extends State<BuySheetWidget> {
               ],
             ),
           ),
-          Expanded(
-            child: SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                style: ElevatedButton.styleFrom(
-                    minimumSize: Size.fromHeight(50),
-                    backgroundColor: AppColors.accentBlue),
-                child: const Text(
-                  "Купить",
-                  style: AppTextStyles.whiteHeader3Text,
-                ),
+          const SizedBox(height: 20),
+          if (widget.showErrorText)
+            const Text(
+              "Недостаточно средств",
+              style: TextStyle(
+                  color: AppColors.errorRed,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500),
+            )
+          else
+            const Text(
+              "",
+              style: TextStyle(
+                  color: AppColors.errorRed,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500),
+            ),
+          const SizedBox(height: 20),
+          SizedBox(
+            width: double.infinity,
+            height: 50,
+            child: ElevatedButton(
+              onPressed: onPurchase,
+              style: ElevatedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(50),
+                  backgroundColor: AppColors.accentBlue),
+              child: const Text(
+                "Купить",
+                style: AppTextStyles.whiteHeader3Text,
               ),
             ),
           ),
@@ -201,7 +232,7 @@ class HeaderBottomSheetWidget extends StatelessWidget {
       children: [
         Expanded(
           flex: 4,
-          child: Image(image: product.image, width: 200, height: 200),
+          child: Image(image: product.image, width: 150, height: 150),
         ),
         const Expanded(flex: 1, child: SizedBox()),
         Expanded(

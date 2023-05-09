@@ -12,9 +12,8 @@ abstract class AppColors {
     Color.fromARGB(255, 241, 211, 102),
     Color.fromARGB(255, 219, 67, 82),
     //Color.fromARGB(255, 255, 213, 146),
-    //Color.fromARGB(255, 77, 128, 224),
+    Color.fromARGB(255, 77, 128, 224),
     Color.fromARGB(255, 112, 233, 182),
-    //Color.fromARGB(255, 108, 186, 214),
     Color.fromARGB(255, 224, 67, 88),
   ];
 }

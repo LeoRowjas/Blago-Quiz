@@ -1,17 +1,11 @@
 import 'package:blago_quiz/theme/app_colors.dart';
 import 'package:blago_quiz/theme/text_styles.dart';
+import 'package:blago_quiz/widgets/profile/profile_screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class PassedQuizzesHistoryWidget extends StatefulWidget {
   PassedQuizzesHistoryWidget({super.key});
-  static final model = [
-    _QuizzModel("Наука", 450, DateTime(2022, 4, 5, 17, 30)),
-    _QuizzModel("Искусство", 450, DateTime(2022, 4, 5, 17, 30)),
-    _QuizzModel("Общая", 450, DateTime(2022, 4, 5, 17, 30)),
-    _QuizzModel("Кино и мультфильмы", 450, DateTime(2022, 4, 5, 17, 30)),
-    _QuizzModel("theme", 450, DateTime.now())
-  ];
 
   @override
   State<PassedQuizzesHistoryWidget> createState() =>
@@ -23,18 +17,18 @@ class PassedQuizzesHistoryWidgetState
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: _QuizzTable(quizData: PassedQuizzesHistoryWidget.model),
+      child: _QuizzTable(quizData: User.passedQuizzes.value),
     );
   }
 }
 
-class _QuizzModel {
+class QuizzModel {
   String theme;
   int score;
   DateTime dateTime;
   late String passTime;
 
-  _QuizzModel(this.theme, this.score, this.dateTime) {
+  QuizzModel(this.theme, this.score, this.dateTime) {
     passTime =
         "${DateFormat("Hm").format(dateTime)} ${DateFormat("yMMMd").format(dateTime)}";
   }
@@ -43,7 +37,7 @@ class _QuizzModel {
 class _QuizzTable extends StatelessWidget {
   const _QuizzTable({required this.quizData});
 
-  final List<_QuizzModel> quizData;
+  final List<QuizzModel> quizData;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -83,10 +77,9 @@ class _QuizzTable extends StatelessWidget {
   }
 }
 
-//TODO: создать система инхеритед виджетов, чтобы не прокидывать через конструкторы каждый раз данные
 class _QuizzTableItems extends StatelessWidget {
   const _QuizzTableItems({required this.quizData});
-  final List<_QuizzModel> quizData;
+  final List<QuizzModel> quizData;
 
   @override
   Widget build(BuildContext context) {

@@ -15,7 +15,7 @@ class AuthScreenWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: const [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 90),
+            padding: EdgeInsets.only(top: 80, bottom: 30),
             child: _TopContent(),
           ),
           _LoginContentWidget(),
@@ -189,9 +189,17 @@ class _TopContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      "Some content with app name",
-      style: TextStyle(fontSize: 30),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          "Blago quiz",
+          style: Theme.of(context).textTheme.headline3?.copyWith(
+              color: AppColors.accentBlue, fontWeight: FontWeight.w600),
+        ),
+        const Icon(Icons.diamond_outlined,
+            size: 60, color: AppColors.sapphireColor)
+      ],
     );
   }
 }

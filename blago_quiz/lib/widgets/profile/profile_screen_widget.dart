@@ -5,6 +5,14 @@ import 'package:blago_quiz/widgets/profile/passed_quizzes_history_widget.dart';
 import 'package:blago_quiz/widgets/profile/purchase_history_widget.dart';
 import 'package:flutter/material.dart';
 
+abstract class User with ChangeNotifier {
+  static ValueNotifier<int> balance = ValueNotifier(5000);
+  static String name = "Леонид";
+
+  static ValueNotifier<List<PurchaseData>> purchases = ValueNotifier([]);
+  static ValueNotifier<List<QuizzModel>> passedQuizzes = ValueNotifier([]);
+}
+
 class ProfileScreenWidget extends StatelessWidget {
   ProfileScreenWidget({
     super.key,
@@ -17,7 +25,7 @@ class ProfileScreenWidget extends StatelessWidget {
     ),
     ExpansionPanelData(
       headerValue: "Покупки",
-      expandedValue: PurchaseHistory(),
+      expandedValue: const PurchaseHistory(),
     ),
   ];
 
@@ -43,14 +51,19 @@ class ProfileScreenWidget extends StatelessWidget {
   }
 }
 
-class _TopInfoProfileWidget extends StatelessWidget {
+class _TopInfoProfileWidget extends StatefulWidget {
   const _TopInfoProfileWidget();
 
+  @override
+  State<_TopInfoProfileWidget> createState() => _TopInfoProfileWidgetState();
+}
+
+class _TopInfoProfileWidgetState extends State<_TopInfoProfileWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
+        const Padding(
           padding: EdgeInsets.only(top: 8),
           child: CircleAvatar(
             backgroundImage: AssetImage(ProfileImg.leonid),
@@ -58,21 +71,49 @@ class _TopInfoProfileWidget extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Text(
-            "Леонид",
+            User.name,
             style: AppTextStyles.blackHeader,
           ),
         ),
-        Text(
-          "Пройдено викторин - ${PassedQuizzesHistoryWidget.model.length}",
-          style: AppTextStyles.additionalGreyText,
-        ),
-        Text(
-          "Куплено предметов - ${PurchaseHistory.purchases.length}",
-          style: AppTextStyles.additionalGreyText,
-        )
+        PassedQuizzCount(),
+        PurchasesCount(),
       ],
+    );
+  }
+}
+
+class PassedQuizzCount extends StatelessWidget {
+  const PassedQuizzCount({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: User.passedQuizzes,
+      builder: ((context, value, child) {
+        return Text(
+          "Пройдено викторин - ${User.passedQuizzes.value.length}",
+          style: AppTextStyles.additionalGreyText,
+        );
+      }),
+    );
+  }
+}
+
+class PurchasesCount extends StatelessWidget {
+  const PurchasesCount({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: User.purchases,
+      builder: ((context, value, child) {
+        return Text(
+          "Куплено предметов - ${User.purchases.value.length}",
+          style: AppTextStyles.additionalGreyText,
+        );
+      }),
     );
   }
 }

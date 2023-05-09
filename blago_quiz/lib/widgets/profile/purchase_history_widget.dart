@@ -1,19 +1,13 @@
+import 'package:blago_quiz/widgets/store/store_screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:blago_quiz/widgets/profile/profile_screen_widget.dart';
 
 import '../../theme/app_colors.dart';
 import '../../theme/text_styles.dart';
 
 class PurchaseHistory extends StatefulWidget {
-  PurchaseHistory({super.key});
-
-  static final List<PurchaseData> purchases = [
-    PurchaseData("Ручка", 500, DateTime(2023, 2, 14, 14, 48)),
-    PurchaseData("Худи", 5000, DateTime(2023, 2, 14, 14, 48)),
-    PurchaseData("Кружка", 1500, DateTime(2023, 2, 14, 14, 48)),
-    PurchaseData("Записная книжка", 1200, DateTime(2023, 2, 14, 14, 48)),
-    PurchaseData("Браслет", 750, DateTime(2023, 2, 14, 14, 48)),
-  ];
+  const PurchaseHistory({super.key});
 
   @override
   State<PurchaseHistory> createState() => _PurchaseHistoryState();
@@ -24,19 +18,18 @@ class _PurchaseHistoryState extends State<PurchaseHistory> {
   Widget build(BuildContext context) {
     return Center(
       child: _PurchasesTable(
-        purchases: PurchaseHistory.purchases,
+        purchases: User.purchases.value,
       ),
     );
   }
 }
 
 class PurchaseData {
-  final String productName;
-  final int cost;
+  final Product product;
   final DateTime time;
   late String purchaseTime;
 
-  PurchaseData(this.productName, this.cost, this.time) {
+  PurchaseData(this.product, this.time) {
     purchaseTime =
         "${DateFormat("Hm").format(time)} ${DateFormat("yMMMd").format(time)}";
   }
@@ -83,7 +76,6 @@ class _PurchasesTable extends StatelessWidget {
   }
 }
 
-//TODO: создать система инхеритед виджетов, чтобы не прокидывать через конструкторы каждый раз данные
 class _PurchaseTableItems extends StatelessWidget {
   const _PurchaseTableItems({required this.purchases});
 
@@ -108,14 +100,14 @@ class _PurchaseTableItems extends StatelessWidget {
                 Expanded(
                   flex: 7,
                   child: Text(
-                    purchases[index].productName,
+                    purchases[index].product.name,
                     style: AppTextStyles.whiteMediumText,
                   ),
                 ),
                 Expanded(
                   flex: 4,
                   child: Text(
-                    purchases[index].cost.toString(),
+                    purchases[index].product.cost.toString(),
                     style: AppTextStyles.whiteMediumText,
                   ),
                 ),
