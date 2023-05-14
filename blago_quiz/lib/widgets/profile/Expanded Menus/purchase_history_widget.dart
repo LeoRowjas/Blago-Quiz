@@ -1,10 +1,8 @@
-import 'package:blago_quiz/widgets/store/store_screen_widget.dart';
+import 'package:blago_quiz/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:blago_quiz/widgets/profile/profile_screen_widget.dart';
-
-import '../../theme/app_colors.dart';
-import '../../theme/text_styles.dart';
+import '../../../theme/text_styles.dart';
+import '../Models/purchase_operation.dart';
 
 class PurchaseHistory extends StatefulWidget {
   const PurchaseHistory({super.key});
@@ -21,17 +19,6 @@ class _PurchaseHistoryState extends State<PurchaseHistory> {
         purchases: User.purchases.value,
       ),
     );
-  }
-}
-
-class PurchaseData {
-  final Product product;
-  final DateTime time;
-  late String purchaseTime;
-
-  PurchaseData(this.product, this.time) {
-    purchaseTime =
-        "${DateFormat("Hm").format(time)} ${DateFormat("yMMMd").format(time)}";
   }
 }
 

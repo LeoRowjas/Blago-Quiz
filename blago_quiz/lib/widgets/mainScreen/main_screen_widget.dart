@@ -33,7 +33,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         child: IndexedStack(
           index: _selectedTab,
           children: [
-            QuizzesScreenWidget(),
+            const QuizzesScreenWidget(),
             ProfileScreenWidget(),
             const StoreScreenWidget(),
             const InfoScreenWidget()

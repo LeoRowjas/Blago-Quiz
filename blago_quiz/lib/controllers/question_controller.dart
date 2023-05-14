@@ -1,6 +1,6 @@
 // ignore_for_file: unnecessary_this
 
-import 'package:blago_quiz/questions/romanov_questions.dart';
+import 'package:blago_quiz/widgets/quizzes/menu/components/quizz_item.dart';
 import 'package:blago_quiz/widgets/quizzes/question.dart';
 import 'package:blago_quiz/widgets/score/score_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,17 +16,23 @@ class QuestionController extends GetxController
   late PageController _pageController;
   PageController get pageController => this._pageController;
 
-  final List<Question> _questions = RomanovQuestions.questions
-      .map(
-        (question) => Question(
-          question: question.question,
-          answers: question.answers,
-          rightAnswerIndex: question.rightAnswerIndex,
-        ),
-      )
-      .toList();
-
+  late List<Question> _questions;
   List<Question> get questions => this._questions;
+
+  static late QuizzItem? quizzDetails;
+  QuestionController();
+  QuestionController.set({QuizzItem? quizzItem}) {
+    quizzDetails = quizzItem;
+    _questions = quizzItem!.questions
+        .map(
+          (question) => Question(
+            question: question.question,
+            answers: question.answers,
+            rightAnswerIndex: question.rightAnswerIndex,
+          ),
+        )
+        .toList();
+  }
 
   bool _isAnswered = false;
   bool get isAnswered => this._isAnswered;
@@ -62,7 +68,6 @@ class QuestionController extends GetxController
   @override
   void onClose() {
     super.onClose();
-
     _animationController.dispose();
     _pageController.dispose();
   }
@@ -77,7 +82,7 @@ class QuestionController extends GetxController
     _animationController.stop();
     update();
 
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 1), () {
       nextQuestion();
     });
   }
@@ -86,12 +91,14 @@ class QuestionController extends GetxController
     if (_questionNumber.value != _questions.length) {
       _isAnswered = false;
       _pageController.nextPage(
-          duration: const Duration(milliseconds: 150), curve: Curves.ease);
+          duration: const Duration(milliseconds: 350), curve: Curves.easeIn);
 
       _animationController.reset();
       _animationController.forward().whenComplete(nextQuestion);
     } else {
-      Get.to(const ScoreScreenWidget());
+      Get.to(ScoreScreenWidget(
+        questions: _questions,
+      ));
     }
   }
 

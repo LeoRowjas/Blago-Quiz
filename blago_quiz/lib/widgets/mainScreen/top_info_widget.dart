@@ -1,6 +1,5 @@
 import 'package:blago_quiz/widgets/profile/profile_screen_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class TopInfoWidget extends StatelessWidget {
   const TopInfoWidget({super.key});

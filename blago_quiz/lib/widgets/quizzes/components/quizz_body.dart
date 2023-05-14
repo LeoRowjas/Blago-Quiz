@@ -3,11 +3,13 @@ import 'package:blago_quiz/resources/resources.dart';
 import 'package:blago_quiz/theme/app_colors.dart';
 import 'package:blago_quiz/widgets/quizzes/components/progress_bar.dart';
 import 'package:blago_quiz/widgets/quizzes/components/question_card.dart';
+import 'package:blago_quiz/widgets/quizzes/question.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class QuestionBody extends StatelessWidget {
-  const QuestionBody({super.key});
+  const QuestionBody({super.key, required this.questions});
+  final List<Question> questions;
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +38,7 @@ class QuestionBody extends StatelessWidget {
                 child: Obx(
                   () => Text.rich(
                     TextSpan(
-                      text:
-                          "Question ${questionController.questionNumber.value}",
+                      text: "Вопрос ${questionController.questionNumber.value}",
                       style: Theme.of(context)
                           .textTheme
                           .headline4
@@ -67,7 +68,7 @@ class QuestionBody extends StatelessWidget {
                   onPageChanged: questionController.updateTheQuestionNum,
                   itemCount: questionController.questions.length,
                   itemBuilder: ((context, index) => QuestionCard(
-                        question: questionController.questions[index],
+                        question: questions[index],
                       )),
                 ),
               )

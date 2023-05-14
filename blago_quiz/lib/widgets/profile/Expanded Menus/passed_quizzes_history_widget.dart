@@ -2,10 +2,11 @@ import 'package:blago_quiz/theme/app_colors.dart';
 import 'package:blago_quiz/theme/text_styles.dart';
 import 'package:blago_quiz/widgets/profile/profile_screen_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
+import '../Models/quiz_model.dart';
 
 class PassedQuizzesHistoryWidget extends StatefulWidget {
-  PassedQuizzesHistoryWidget({super.key});
+  const PassedQuizzesHistoryWidget({super.key});
 
   @override
   State<PassedQuizzesHistoryWidget> createState() =>
@@ -19,18 +20,6 @@ class PassedQuizzesHistoryWidgetState
     return Center(
       child: _QuizzTable(quizData: User.passedQuizzes.value),
     );
-  }
-}
-
-class QuizzModel {
-  String theme;
-  int score;
-  DateTime dateTime;
-  late String passTime;
-
-  QuizzModel(this.theme, this.score, this.dateTime) {
-    passTime =
-        "${DateFormat("Hm").format(dateTime)} ${DateFormat("yMMMd").format(dateTime)}";
   }
 }
 

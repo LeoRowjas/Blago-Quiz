@@ -1,6 +1,8 @@
 import 'package:blago_quiz/theme/app_colors.dart';
 import 'package:blago_quiz/theme/text_styles.dart';
+import 'package:blago_quiz/widgets/mainScreen/main_screen_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AuthScreenWidget extends StatelessWidget {
   const AuthScreenWidget({super.key});
@@ -56,9 +58,7 @@ class _LoginContentWidget extends StatelessWidget {
             TextButton(
               style: TextButton.styleFrom(
                   foregroundColor: AppColors.sapphireColor),
-              onPressed: () {
-                Navigator.of(context).pushReplacementNamed("/resetPassword");
-              },
+              onPressed: () {},
               child: const Text("Сбросить пароль"),
             ),
             const Expanded(
@@ -83,9 +83,7 @@ class RegisterButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
               minimumSize: const Size.fromHeight(45),
               backgroundColor: AppColors.accentBlue),
-          onPressed: () {
-            Navigator.of(context).pushReplacementNamed("/register");
-          },
+          onPressed: () {},
           child: const Text(
             "Зарегестрироваться",
             style: AppTextStyles.authScreenMainText,
@@ -114,7 +112,7 @@ class _InfoFormsWidgetState extends State<_InfoFormsWidget> {
         _passwordFieldController.text == "123") {
       errorText = "";
 
-      Navigator.of(context).pushReplacementNamed("/main");
+      Get.to(const MainScreenWidget());
     } else if (_loginFieldController.text.isEmpty &&
         _passwordFieldController.text.isNotEmpty) {
       errorText = "Введите логин";

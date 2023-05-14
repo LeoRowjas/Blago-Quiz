@@ -10,63 +10,43 @@ class StoreScreenWidget extends StatelessWidget {
   final List<Product> products = const [
     Product(
       name: "Авторучка",
-      cost: 540,
+      cost: 500,
       image: AssetImage(ProductImage.pen),
     ),
     Product(
+      name: "Браслет",
+      cost: 700,
+      image: AssetImage(ProductImage.bracelet),
+    ),
+    Product(
+      name: "Кружка",
+      cost: 2100,
+      image: AssetImage(ProductImage.cup),
+    ),
+    Product(
+      name: "Блокнот",
+      cost: 1500,
+      image: AssetImage(ProductImage.notebook),
+    ),
+    Product(
       name: "Футболка",
-      cost: 4000,
+      cost: 4500,
       image: AssetImage(ProductImage.shirt),
     ),
     Product(
       name: "Шоппер",
-      cost: 3000,
+      cost: 5100,
       image: AssetImage(ProductImage.shopper),
     ),
     Product(
-      name: "Билеты в театр",
-      cost: 7500,
-      image: AssetImage(ProductImage.tickets),
+      name: "Носки",
+      cost: 1800,
+      image: AssetImage(ProductImage.socks),
     ),
     Product(
-      name: "Авторучка",
-      cost: 540,
-      image: AssetImage(ProductImage.pen),
-    ),
-    Product(
-      name: "Футболка",
-      cost: 4000,
-      image: AssetImage(ProductImage.shirt),
-    ),
-    Product(
-      name: "Шоппер",
-      cost: 3000,
-      image: AssetImage(ProductImage.shopper),
-    ),
-    Product(
-      name: "Билеты в театр",
-      cost: 7500,
-      image: AssetImage(ProductImage.tickets),
-    ),
-    Product(
-      name: "Авторучка",
-      cost: 540,
-      image: AssetImage(ProductImage.pen),
-    ),
-    Product(
-      name: "Футболка",
-      cost: 4000,
-      image: AssetImage(ProductImage.shirt),
-    ),
-    Product(
-      name: "Шоппер",
-      cost: 3000,
-      image: AssetImage(ProductImage.shopper),
-    ),
-    Product(
-      name: "Билеты в театр",
-      cost: 7500,
-      image: AssetImage(ProductImage.tickets),
+      name: "Стикеры",
+      cost: 800,
+      image: AssetImage(ProductImage.stickers),
     ),
   ];
 
@@ -114,7 +94,11 @@ class ProductTileWidget extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: Image(image: product.image, alignment: Alignment.topCenter),
+            child: Image(
+              image: product.image,
+              alignment: Alignment.topCenter,
+              height: 180,
+            ),
           ),
           Expanded(
             child: ElevatedButton(

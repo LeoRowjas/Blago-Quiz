@@ -1,9 +1,11 @@
 import 'package:blago_quiz/resources/resources.dart';
 import 'package:blago_quiz/theme/app_colors.dart';
 import 'package:blago_quiz/theme/text_styles.dart';
-import 'package:blago_quiz/widgets/profile/passed_quizzes_history_widget.dart';
-import 'package:blago_quiz/widgets/profile/purchase_history_widget.dart';
 import 'package:flutter/material.dart';
+import 'Expanded Menus/passed_quizzes_history_widget.dart';
+import 'Expanded Menus/purchase_history_widget.dart';
+import 'Models/purchase_operation.dart';
+import 'Models/quiz_model.dart';
 
 abstract class User with ChangeNotifier {
   static ValueNotifier<int> balance = ValueNotifier(5000);
@@ -21,7 +23,7 @@ class ProfileScreenWidget extends StatelessWidget {
   final List<ExpansionPanelData> data = [
     ExpansionPanelData(
       headerValue: "Пройденные викторины",
-      expandedValue: PassedQuizzesHistoryWidget(),
+      expandedValue: const PassedQuizzesHistoryWidget(),
     ),
     ExpansionPanelData(
       headerValue: "Покупки",
@@ -77,8 +79,8 @@ class _TopInfoProfileWidgetState extends State<_TopInfoProfileWidget> {
             style: AppTextStyles.blackHeader,
           ),
         ),
-        PassedQuizzCount(),
-        PurchasesCount(),
+        const PassedQuizzCount(),
+        const PurchasesCount(),
       ],
     );
   }
@@ -93,7 +95,7 @@ class PassedQuizzCount extends StatelessWidget {
       valueListenable: User.passedQuizzes,
       builder: ((context, value, child) {
         return Text(
-          "Пройдено викторин - ${User.passedQuizzes.value.length}",
+          "Пройдено викторин - ${value.length}",
           style: AppTextStyles.additionalGreyText,
         );
       }),
@@ -110,7 +112,7 @@ class PurchasesCount extends StatelessWidget {
       valueListenable: User.purchases,
       builder: ((context, value, child) {
         return Text(
-          "Куплено предметов - ${User.purchases.value.length}",
+          "Куплено предметов - ${value.length}",
           style: AppTextStyles.additionalGreyText,
         );
       }),
