@@ -87,14 +87,14 @@ class _PurchaseTableItems extends StatelessWidget {
                 Expanded(
                   flex: 7,
                   child: Text(
-                    purchases[index].product.name,
+                    purchases[index].productName,
                     style: AppTextStyles.whiteMediumText,
                   ),
                 ),
                 Expanded(
                   flex: 4,
                   child: Text(
-                    purchases[index].product.cost.toString(),
+                    purchases[index].cost.toString(),
                     style: AppTextStyles.whiteMediumText,
                   ),
                 ),

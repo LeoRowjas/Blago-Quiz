@@ -3,6 +3,7 @@ import 'package:blago_quiz/theme/text_styles.dart';
 import 'package:blago_quiz/widgets/mainScreen/main_screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthScreenWidget extends StatelessWidget {
   const AuthScreenWidget({super.key});
@@ -105,13 +106,16 @@ class _InfoFormsWidgetState extends State<_InfoFormsWidget> {
   final _loginFieldController = TextEditingController();
   final _passwordFieldController = TextEditingController();
 
+  late bool userIsLogin;
+
   String errorText = "";
 
-  void auth() {
+  void auth() async {
     if (_loginFieldController.text == "adm" &&
         _passwordFieldController.text == "123") {
       errorText = "";
-
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      pref.setBool("isUserLogin", true);
       Get.to(const MainScreenWidget());
     } else if (_loginFieldController.text.isEmpty &&
         _passwordFieldController.text.isNotEmpty) {

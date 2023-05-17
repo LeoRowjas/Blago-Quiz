@@ -2,6 +2,7 @@ import 'package:blago_quiz/theme/app_colors.dart';
 import 'package:blago_quiz/theme/text_styles.dart';
 import 'package:blago_quiz/widgets/profile/profile_screen_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Models/quiz_model.dart';
 
@@ -72,6 +73,10 @@ class _QuizzTableItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var pref;
+    void getSharedPrefs(params) async{
+      pref = await SharedPreferences.getInstance()
+    }
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       itemCount: quizData.length,

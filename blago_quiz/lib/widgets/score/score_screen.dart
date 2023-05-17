@@ -4,9 +4,12 @@ import 'package:blago_quiz/resources/resources.dart';
 import 'package:blago_quiz/theme/app_colors.dart';
 import 'package:blago_quiz/widgets/mainScreen/main_screen_widget.dart';
 import 'package:blago_quiz/widgets/profile/profile_screen_widget.dart';
+import 'package:blago_quiz/widgets/quizzes/menu/components/quizz_item.dart';
 import 'package:blago_quiz/widgets/quizzes/question.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../profile/Models/quiz_model.dart';
 
@@ -22,12 +25,19 @@ class _ScoreScreenWidgetState extends State<ScoreScreenWidget> {
   @override
   Widget build(BuildContext context) {
     QuestionController qnController = Get.put(QuestionController());
+    QuizzItem? quizDetails = QuestionController.quizzDetails;
 
-    void onQuit() {
+    void onQuit() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setStringList("quiz1RES", [
+        quizDetails!.title,
+        (qnController.numOfcorrectAnswer * 100).toString(),
+        "${DateFormat("Hm").format(DateTime.now())} ${DateFormat("yMMMd").format(DateTime.now())}",
+      ]);
       User.passedQuizzes.value.insert(
         0,
         QuizzModel(
-          QuestionController.quizzDetails!.title,
+          quizDetails.title,
           qnController.numOfcorrectAnswer * 100,
           DateTime.now(),
         ),

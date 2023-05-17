@@ -35,7 +35,8 @@ class _BuySheetWidgetState extends State<BuySheetWidget> {
         widget.showErrorText = false;
         Get.back();
         User.balance.value -= finalPrice;
-        User.purchases.value.add(PurchaseData(widget.product, DateTime.now()));
+        User.purchases.value.add(PurchaseData(
+            widget.product.name, widget.product.cost, DateTime.now()));
         User.purchases.notifyListeners();
       } else {
         widget.showErrorText = true;

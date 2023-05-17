@@ -1,13 +1,12 @@
 import 'package:intl/intl.dart';
 
-import '../../store/store_screen_widget.dart';
-
 class PurchaseData {
-  final Product product;
+  final String productName;
+  final int cost;
   final DateTime time;
   late String purchaseTime;
 
-  PurchaseData(this.product, this.time) {
+  PurchaseData(this.productName, this.cost, this.time) {
     purchaseTime =
         "${DateFormat("Hm").format(time)} ${DateFormat("yMMMd").format(time)}";
   }

@@ -1,14 +1,19 @@
+import 'package:blago_quiz/widgets/authScreen/auth_screen_widget.dart';
 import 'package:blago_quiz/widgets/mainScreen/main_screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  bool? isUserLogin = pref.getBool("isUserLogin");
+  runApp(MyApp(isUserLogin: isUserLogin));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  const MyApp({super.key, required this.isUserLogin});
+  final bool? isUserLogin;
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -23,7 +28,9 @@ class MyApp extends StatelessWidget {
           unselectedItemColor: Color.fromARGB(255, 117, 117, 117),
         ),
       ),
-      home: const MainScreenWidget(),
+      home: isUserLogin != null
+          ? const MainScreenWidget()
+          : const AuthScreenWidget(),
     );
   }
 }
