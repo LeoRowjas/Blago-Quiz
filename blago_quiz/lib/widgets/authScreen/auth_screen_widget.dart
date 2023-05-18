@@ -48,6 +48,13 @@ class _LoginContentWidget extends StatelessWidget {
         decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromARGB(255, 53, 53, 53),
+              offset: Offset(0.0, 1.0), //(x,y)
+              blurRadius: 12,
+            ),
+          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

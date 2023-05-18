@@ -69,47 +69,49 @@ class _PurchaseTableItems extends StatelessWidget {
   final List<PurchaseData> purchases;
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: purchases.length,
-      shrinkWrap: true,
-      itemBuilder: ((context, index) {
-        return Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: const Color.fromARGB(140, 0, 0, 0)),
-            borderRadius: BorderRadius.circular(10),
-            color: AppColors.sapphireColor,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 7,
-                  child: Text(
-                    purchases[index].productName,
-                    style: AppTextStyles.whiteMediumText,
-                  ),
+    return Column(
+      children: [
+        ...List.generate(
+          purchases.length,
+          (index) {
+            return Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: const Color.fromARGB(140, 0, 0, 0)),
+                borderRadius: BorderRadius.circular(10),
+                color: AppColors.sapphireColor,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 7,
+                      child: Text(
+                        purchases[index].productName,
+                        style: AppTextStyles.whiteMediumText,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 4,
+                      child: Text(
+                        purchases[index].cost.toString(),
+                        style: AppTextStyles.whiteMediumText,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 5,
+                      child: Text(
+                        purchases[index].purchaseTime,
+                        style: AppTextStyles.whiteMediumText,
+                      ),
+                    )
+                  ],
                 ),
-                Expanded(
-                  flex: 4,
-                  child: Text(
-                    purchases[index].cost.toString(),
-                    style: AppTextStyles.whiteMediumText,
-                  ),
-                ),
-                Expanded(
-                  flex: 5,
-                  child: Text(
-                    purchases[index].purchaseTime,
-                    style: AppTextStyles.whiteMediumText,
-                  ),
-                )
-              ],
-            ),
-          ),
-        );
-      }),
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 }

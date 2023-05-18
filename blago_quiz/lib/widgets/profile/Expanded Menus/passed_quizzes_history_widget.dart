@@ -2,7 +2,6 @@ import 'package:blago_quiz/theme/app_colors.dart';
 import 'package:blago_quiz/theme/text_styles.dart';
 import 'package:blago_quiz/widgets/profile/profile_screen_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Models/quiz_model.dart';
 
@@ -73,25 +72,23 @@ class _QuizzTableItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var pref;
-    void getSharedPrefs(params) async{
-      pref = await SharedPreferences.getInstance()
-    }
-    return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: quizData.length,
-      shrinkWrap: true,
-      itemBuilder: ((context, index) {
-        return Column(
-          children: [
-            Container(
+    return Column(
+      children: [
+        ...List.generate(
+          quizData.length,
+          (index) {
+            return Container(
+              margin: const EdgeInsets.symmetric(vertical: 2),
               decoration: BoxDecoration(
                 border: Border.all(color: const Color.fromARGB(140, 0, 0, 0)),
                 borderRadius: BorderRadius.circular(10),
                 color: AppColors.sapphireColor,
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 4,
+                ),
                 child: Row(
                   children: [
                     Expanded(
@@ -118,11 +115,57 @@ class _QuizzTableItems extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
-            const SizedBox(height: 2),
-          ],
-        );
-      }),
+            );
+          },
+        ),
+      ],
     );
   }
 }
+// ListView.builder(
+//       physics: const NeverScrollableScrollPhysics(),
+//       itemCount: quizData.length,
+//       shrinkWrap: true,
+//       itemBuilder: ((context, index) {
+//         return Column(
+//           children: [
+//             Container(
+//               decoration: BoxDecoration(
+//                 border: Border.all(color: const Color.fromARGB(140, 0, 0, 0)),
+//                 borderRadius: BorderRadius.circular(10),
+//                 color: AppColors.sapphireColor,
+//               ),
+//               child: Padding(
+//                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+//                 child: Row(
+//                   children: [
+//                     Expanded(
+//                       flex: 7,
+//                       child: Text(
+//                         quizData[index].theme,
+//                         style: AppTextStyles.whiteMediumText,
+//                       ),
+//                     ),
+//                     Expanded(
+//                       flex: 4,
+//                       child: Text(
+//                         quizData[index].score.toString(),
+//                         style: AppTextStyles.whiteMediumText,
+//                       ),
+//                     ),
+//                     Expanded(
+//                       flex: 5,
+//                       child: Text(
+//                         quizData[index].passTime,
+//                         style: AppTextStyles.whiteMediumText,
+//                       ),
+//                     )
+//                   ],
+//                 ),
+//               ),
+//             ),
+//             const SizedBox(height: 2),
+//           ],
+//         );
+//       }),
+//     );
