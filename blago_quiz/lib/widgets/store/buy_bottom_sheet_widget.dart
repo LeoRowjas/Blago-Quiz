@@ -48,11 +48,14 @@ class _BuySheetWidgetState extends State<BuySheetWidget> {
 
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: 2,
       children: [
+        const SizedBox(height: 2),
         HeaderBottomSheetWidget(product: widget.product),
         const SizedBox(height: 8),
         Center(
           //Две кнопки выбора способа доставки здесь
+          // 1 кнопка
           child: Column(
             children: [
               SizedBox(
@@ -109,6 +112,7 @@ class _BuySheetWidgetState extends State<BuySheetWidget> {
                 ),
               ),
               const SizedBox(height: 10),
+              // 2 кнопка
               SizedBox(
                 width: 370,
                 child: OutlinedButton(
@@ -164,44 +168,26 @@ class _BuySheetWidgetState extends State<BuySheetWidget> {
                 ),
               ),
               const SizedBox(height: 10),
-              RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                        text: "Итоговая стоимость - $finalPrice",
-                        style: AppTextStyles.blackLargeText),
-                    const WidgetSpan(
-                        child: Icon(
-                      Icons.diamond_outlined,
-                      size: 18,
-                      color: AppColors.sapphireColor,
-                    )),
-                  ],
-                ),
-              ),
+              FinalPriceWidget(finalPrice: finalPrice),
             ],
           ),
         ),
         const SizedBox(height: 20),
-        if (widget.showErrorText)
+        //текст при недостатке средств
+        if (widget.showErrorText) ...{
           const Center(
             child: Text(
               "Недостаточно средств",
               style: TextStyle(
-                  color: AppColors.errorRed,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500),
-            ),
-          )
-        else
-          const Text(
-            "",
-            style: TextStyle(
                 color: AppColors.errorRed,
                 fontSize: 16,
-                fontWeight: FontWeight.w500),
+                fontWeight: FontWeight.w500,
+              ),
+            ),
           ),
+        },
         const SizedBox(height: 20),
+        // Кнопка покупки
         SizedBox(
           width: double.infinity,
           height: 50,
@@ -218,6 +204,34 @@ class _BuySheetWidgetState extends State<BuySheetWidget> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class FinalPriceWidget extends StatelessWidget {
+  const FinalPriceWidget({
+    Key? key,
+    required this.finalPrice,
+  }) : super(key: key);
+
+  final int finalPrice;
+
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      text: TextSpan(
+        children: [
+          TextSpan(
+              text: "Итоговая стоимость - $finalPrice",
+              style: AppTextStyles.blackLargeText),
+          const WidgetSpan(
+              child: Icon(
+            Icons.diamond_outlined,
+            size: 18,
+            color: AppColors.sapphireColor,
+          )),
+        ],
+      ),
     );
   }
 }

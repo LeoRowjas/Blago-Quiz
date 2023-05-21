@@ -1,5 +1,4 @@
 import 'package:blago_quiz/theme/app_colors.dart';
-import 'package:blago_quiz/widgets/infoSceen/info_screen_widget.dart';
 import 'package:blago_quiz/widgets/profile/profile_screen_widget.dart';
 import 'package:blago_quiz/widgets/mainScreen/top_info_widget.dart';
 import 'package:blago_quiz/widgets/quizzes/menu/quizzes_menu_widget.dart';
@@ -37,7 +36,6 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
             const QuizzesScreenWidget(),
             ProfileScreenWidget(),
             const StoreScreenWidget(),
-            const InfoScreenWidget()
           ],
         ),
       ),
@@ -53,8 +51,6 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Профиль"),
           BottomNavigationBarItem(
               icon: Icon(Icons.diamond_outlined), label: "Магазин"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.info_outline), label: "Инфо"),
         ],
       ),
     );
